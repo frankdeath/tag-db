@@ -2,6 +2,7 @@
 
 import os
 import hashlib
+import time
 
 class FileInfo:
   """A file info class"""
@@ -35,6 +36,9 @@ class FileInfo:
   def __repr__(self):
     return "{} - inode = {}".format(self.path, self.inode)
 
+  def formatTime(self, t):
+    return time.strftime("%Y-%m-%dT%H:%M:%S%z", time.localtime(t))
+
   def __str__(self):
     outStr = "Path: {}\n".format(self.path)
     outStr += "Parent: {}\n".format(self.parent)
@@ -45,9 +49,9 @@ class FileInfo:
     outStr += "Type: {}\n".format(self.type)
     outStr += "Inode: {}\n".format(self.inode)
     outStr += "Size (Bytes): {}\n".format(self.size)
-    outStr += "Access Time: {}\n".format(self.atime)
-    outStr += "Modification Time: {}\n".format(self.mtime)
-    outStr += "Creation Time: {}\n".format(self.ctime)
+    outStr += "Access Time: {}\n".format(self.formatTime(self.atime))
+    outStr += "Modification Time: {}\n".format(self.formatTime(self.mtime))
+    outStr += "Creation Time: {}\n".format(self.formatTime(self.ctime))
     outStr += "SHA1 sum: {}\n".format(self.sha1sum)
     outStr += "SHA256 sum: {}\n".format(self.sha256sum)
     outStr += "Database Index: {}\n".format(self.index)
